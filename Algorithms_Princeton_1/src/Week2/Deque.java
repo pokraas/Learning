@@ -56,7 +56,7 @@ public class Deque<Item> implements Iterable<Item> {
 		size++;
 	}
 	
-	public Item returnFirst() {
+	public Item removeFirst() {
 		Node<Item> first = start.next;
 		start.next = first.next;
 		start.next.prev = start;
@@ -64,7 +64,7 @@ public class Deque<Item> implements Iterable<Item> {
 		return first.data;
 	}
 	
-	public Item returnLast() {
+	public Item removeLast() {
 		Node<Item> last = end.prev;
 		end.prev=last.prev;
 		end.prev.next=end;
@@ -107,7 +107,7 @@ public class Deque<Item> implements Iterable<Item> {
 		deque.addFirst(4);
 		deque.addLast(7);
 		deque.addFirst(3);
-		System.out.println(deque.returnFirst());
+		System.out.println(deque.removeFirst());
 		deque.addFirst(2);
 		deque.addLast(8);
 		for (int i:deque) {
