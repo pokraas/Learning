@@ -70,7 +70,8 @@ class Operator {
 		case("arccot(") :
 		case("arcctg(") : return Math.atan(1/val);
 		case("sqrt(") : return Math.sqrt(val);
-
+		case("ln(") : return Math.log(val);
+		case("log(") : return Math.log10(val);
 
 		default: throw new UnsupportedOperationException(opString+" is an unknown operation");	
 		}

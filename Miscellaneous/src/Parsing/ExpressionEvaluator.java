@@ -30,31 +30,72 @@ public class ExpressionEvaluator {
 	 * Parses the expression into the <i><b>ArrayList<String> a</i></b> of numbers and operators,
 	 * each in a separate entry.
 	 */
-	//TODO change (( to (*( and N( to N*(
-	//TODO (more importantly) change (-( to ( -1 * ( and (-oper( to ( -1 * oper(
 	private static void parseExpression(String expression) {
 
 		a = new ArrayList<String>(1);
 		char[] charArray = expression.toCharArray();
 		StringBuilder sb = new StringBuilder();
 		int i=0;
+		//if the expression starts with a minus sign
 		if (charArray[0]=='-') a.add(i++,"0");
 		sb.append(charArray[0]);
+		
 		for (int j=1; j<charArray.length;j++) {
 			char curr = charArray[j];
 			char prev = charArray[j-1];
+			char penult='\n';
+			if (j>1) penult = charArray[j-2];
 
-			//starting a new entry
+			//starting a new entry in a
 			if ("()+-*/".indexOf(prev)>-1 ||
-					(isPartOfNumber(prev)^isPartOfNumber(curr))
-					) {
-				a.add(i,sb.toString());
-				i++;
+					(isPartOfNumber(prev)^isPartOfNumber(curr))) {
+				
+				//(-N is substituted by ( -1 * N,
+				//where N is any number or expression			
+				if (prev=='-' && penult=='(') {	
+					a.add(i++,"-1");
+					a.add(i++,"*");
+				}
+				
+				// Adding a * sign where the user can omit it
+				// (between parentheses, before parentheses,
+				// before an operator that begins with a letter)
+				else if (((curr=='(' || Character.isAlphabetic(curr)) &&
+							(isPartOfNumber(prev)||prev==')'))) {
+					a.add(i++,sb.toString());
+					a.add(i++,"*");
+				}
+				
+				//Adding a * sign where the user can omit it
+				//(after parentheses, between parentheses and an operator
+				//that begins with a letter)
+				else if (penult==')' && 
+						(isPartOfNumber(prev) || Character.isAlphabetic(prev))) {
+					a.add(i++,"*");
+					a.add(i++,sb.toString());
+				}
+				
+				//Other cases
+				else {
+					a.add(i++,sb.toString());
+				}
+				
 				sb = new StringBuilder();	
 			}
+			//System.out.println(curr+" "+a.toString());
 			sb.append(curr);
 		}
 		if(!sb.toString().isEmpty()) a.add(sb.toString());
+		
+	}
+	
+	public static void main(String[] args) {
+		//ExpressionEvaluator ee = new ExpressionEvaluator();
+		//System.out.println("Answer: "+evaluateArrayList());
+		parseExpression("sin(3.14159264)");
+		System.out.println(a.toString());
+		System.out.println("Answer: "+evaluateArrayList());
+
 	}
 	
 	/**
@@ -87,8 +128,8 @@ public class ExpressionEvaluator {
 	 */
 	private static double evaluateArrayList() {
 		for (String s : a) {
-			System.out.println(vals.toString());
-			System.out.println(ops.toString());
+			//System.out.println(vals.toString());
+			//System.out.println(ops.toString());
 			//push a new Double onto vals
 			if (isNumeric(s)) vals.push(Double.parseDouble(s));
 			//work with a new operator
@@ -98,15 +139,15 @@ public class ExpressionEvaluator {
 				while (true) {
 					//work with right parenthesis:
 					if (newOp.isRightParen()) {
-						System.out.print("Working with )... ");
+						//System.out.print("Working with )... ");
 						while(!ops.peek().isLeftParen()) {
 							processTopOfOps();
 						}
 						double val = vals.pop();
 						val = ops.pop().processOneArg(val);
-						System.out.println(val);
+						//System.out.println(val);
 						vals.push(val);
-						System.out.println(val);
+						//System.out.println(val);
 						break;
 					}
 					//pushing the new operator onto the operator stack
@@ -134,13 +175,6 @@ public class ExpressionEvaluator {
 		return evaluateArrayList();
 	}
 	
-	public static void main(String[] args) {
-		//ExpressionEvaluator ee = new ExpressionEvaluator();
-		//System.out.println("Answer: "+evaluateArrayList());
-		parseExpression("-10*(sqrt(2^2+12)-(3+1))");
-		System.out.println(a.toString());
-		System.out.println("Answer: "+evaluateArrayList());
 
-	}
 
 }
