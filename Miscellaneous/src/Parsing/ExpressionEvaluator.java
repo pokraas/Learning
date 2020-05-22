@@ -47,7 +47,7 @@ public class ExpressionEvaluator {
 			if (j>1) penult = charArray[j-2];
 
 			//starting a new entry in a
-			if ("()+-*/".indexOf(prev)>-1 ||
+			if ("()+-*/^".indexOf(prev)>-1 ||
 					(isPartOfNumber(prev)^isPartOfNumber(curr))) {
 				
 				//(-N is substituted by ( -1 * N,
@@ -89,14 +89,6 @@ public class ExpressionEvaluator {
 		
 	}
 	
-	public static void main(String[] args) {
-		//ExpressionEvaluator ee = new ExpressionEvaluator();
-		//System.out.println("Answer: "+evaluateArrayList());
-		parseExpression("sin(3.14159264)");
-		System.out.println(a.toString());
-		System.out.println("Answer: "+evaluateArrayList());
-
-	}
 	
 	/**
 	 * Returns true if the String parameter can be parsed to a Double.
@@ -175,6 +167,13 @@ public class ExpressionEvaluator {
 		return evaluateArrayList();
 	}
 	
+	public static void main(String[] args) {
+		//ExpressionEvaluator ee = new ExpressionEvaluator();
+		//System.out.println("Answer: "+evaluateArrayList());
+		parseExpression("8*5^(2+1)");
+		System.out.println(a.toString());
+		System.out.println("Answer: "+evaluateArrayList());
 
+	}
 
 }
