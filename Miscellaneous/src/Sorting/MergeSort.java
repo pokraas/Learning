@@ -13,11 +13,11 @@ public class MergeSort {
 		for (int i=0;i<mid;i++) {
 			l[i]=a[i];		
 		}
-		System.out.println(Arrays.toString(l));
+		//System.out.println(Arrays.toString(l));
 		for (int i=mid;i<n;i++) {
 			r[i-mid]=a[i];		
 		}
-		System.out.println(Arrays.toString(r));
+		//System.out.println(Arrays.toString(r));
 		//recursively dividing l and r
 		mergeSort(l);
 		mergeSort(r);
