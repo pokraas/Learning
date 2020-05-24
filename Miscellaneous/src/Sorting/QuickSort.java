@@ -46,12 +46,16 @@ public class QuickSort {
 		int i=lo;//left pointer: increases
 		int j=hi+1;//right pointer: decreases
 		while (true) {
-			//increasing i until a[i] reaches an element bigger than p
+			//increasing i until a[i] reaches an element bigger than or equal to (!) p
+			//partitioning stops at element equal to p; otherwise the quicksort on an array of
+			//equal elements takes quadratic time, as each element would be moved to the left of p.
 			while (a[++i]<p) {
 				if (i==hi)break;
 			}
 			
-			//decreasing j until a[j] reaches an element smaller than p
+			//decreasing j until a[j] reaches an element smaller than or equal to (!) p
+			//partitioning stops at element equal to p; otherwise the quicksort on an array of
+			//equal elements takes quadratic time, as each element would be moved to the left of p.
 			while(a[--j]>p) {
 				if (j==lo)break;
 			}
@@ -77,16 +81,18 @@ public class QuickSort {
 		int[] a = new int[] {0,1,2,3,4,5};
 		int[] ref = a.clone();
 		shuffle(a);
-//		shuffle(a);
-//		System.out.println(Arrays.toString(a));
-//		quicksort(a);
-//		System.out.println(Arrays.toString(a));
-		for (int i=0;i<6*5*4*3*2*5;i++) {
-			quicksort(a);
-			if (!Arrays.equals(a, ref)) {
-				System.out.println(Arrays.toString(a));
-			}
-		}
+		shuffle(a);
+		System.out.println(Arrays.toString(a));
+		quicksort(a);
+		System.out.println(Arrays.toString(a));
+		
+		//check for all permutations of a * 5 times
+//		for (int i=0;i<6*5*4*3*2*5;i++) {
+//			quicksort(a);
+//			if (!Arrays.equals(a, ref)) {
+//				System.out.println(Arrays.toString(a));
+//			}
+//		}
 
 	}
 
