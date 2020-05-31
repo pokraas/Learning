@@ -85,7 +85,7 @@ public class QuickSort_3WayPartition {
 //				System.out.println(Arrays.toString(a));
 //			}
 //		}
-		compareSorts(5,10000000,1000000);
+		compareSorts(2,10000000,1000000);
 	}
 	
 	/**
