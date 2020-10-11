@@ -81,11 +81,11 @@ class Buecherregal {
     //Hier lauft was falsch 
     public void buchMitTitelEntfernen(String titel){ 
     	System.out.println(titel+" will be deleted...");
-        for(int i = 0; i < anzahlBuecher-1; i++){ 
+        for(int i = 0; i < anzahlBuecher; i++){ 
             if(regal[i] != null){ 
                 if(regal[i].titelAusgeben().equals(titel)){ 
                 	System.out.println("Found the Buch to delete");
-                    while(i<anzahlBuecher-1){ 
+                    while(i<anzahlBuecher){ 
                         regal[i] = regal[i+1]; 
                         i++; 
                     } 
@@ -108,9 +108,9 @@ class Buecherregal {
  
         br.buchEinstellen(b1); 
         br.buchEinstellen(b2); 
-        br.buchEinstellen(b3); 
-        br.buchEinstellen(b4); 
-        br.buchEinstellen(b5);
+        //br.buchEinstellen(b3); 
+        //br.buchEinstellen(b4); 
+        //br.buchEinstellen(b5);
         for (Buch b : br.regal) {
         	System.out.println(b==null ? b:b.titelAusgeben());
         }
@@ -120,6 +120,5 @@ class Buecherregal {
         br.buchMitTitelEntfernen("2 Freunde fuer 4 Pfoten"); 
         System.out.println("After deletion: "+br.anzahlBuecher());
  
-        Buch b6 = br.buchMitTitelFinden("Ein Freund fuer Nanoka"); 
     } 
 }
