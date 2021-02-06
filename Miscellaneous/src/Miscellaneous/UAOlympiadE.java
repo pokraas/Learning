@@ -43,7 +43,7 @@ public class UAOlympiadE {
 	
 	public static void main(String[] args) {
 		int n = 3;
-		int[] vcard = new int[]{4, 5, 6};
+		int[] vcard = new int[]{1, 5, 6};
 		int[] bcard = b(vcard,n);
 		System.out.println(Arrays.toString(bcard));
 		System.out.println();
