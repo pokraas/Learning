@@ -1,6 +1,6 @@
 package Miscellaneous;
 
-public class UAOlympiadG {
+public class UAOlympiadD {
 	
 	static int min(int[][] a, int n) {
 		int min = 0;
