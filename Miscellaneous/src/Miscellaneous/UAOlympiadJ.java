@@ -1,6 +1,6 @@
 package Miscellaneous;
 
-import java.util.Arrays;
+import java.util.Scanner;
 
 public class UAOlympiadJ {
 	
@@ -44,10 +44,17 @@ public class UAOlympiadJ {
 	}
 	
 	public static void main(String[] args) {
-		int[] a = new int[]{5,1,4,3,3,5};
-		int[] b = new int[]{3,5,5,2,2,1};
-		int x=1, y=2;
-
-		System.out.println(maxmood(a, b, 6, x, y));
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int[] a = new int[n];
+		int[] b = new int[n];
+		for (int i = 0; i < n; i++) {
+			a[i] = sc.nextInt();
+			b[i] = sc.nextInt();
+		}
+		int x = sc.nextInt();
+		int y = sc.nextInt();
+		sc.close();
+		System.out.println(maxmood(a, b, n, x, y));
 	}
 }
