@@ -3,6 +3,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+/**
+ * A console application that solves tasks on cyclic permutations (AKA Zykelschreibweise) for the DS exam.
+ * @author Mariia Bogatyreva
+ * @author Alex Pokras
+ */
 public class CyclicPermutations {
 	private static class Permutation {
 		private final int max;
